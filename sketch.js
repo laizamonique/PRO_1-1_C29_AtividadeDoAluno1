@@ -10,6 +10,8 @@ const Composite = Matter.Composite;
 let engine;
 let world;
 var ground;
+var fruit,rope;
+var fruit_con;
 
 function setup() 
 {
@@ -18,7 +20,10 @@ function setup()
   engine = Engine.create();
   world = engine.world;
   ground = new Ground(200,680,600,20);
-
+rope = new Rope(10,{x:245,y:30});
+fruit = Bodies.circle(300,300,20);
+Matter.Composite.add(rope.body,fruit);
+fruit_con = new Link(rope,fruit);
   rectMode(CENTER);
   ellipseMode(RADIUS);
   textSize(50)
@@ -29,7 +34,8 @@ function draw()
 {
   background(51);
   ground.show();
-  
+rope.show();
+ellipse(fruit.position.x,fruit.position.y,30,30);
   Engine.update(engine);
   
 
